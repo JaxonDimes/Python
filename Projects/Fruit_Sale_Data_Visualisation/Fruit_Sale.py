@@ -30,10 +30,6 @@ for item in item_total:
 for thing in total:
     total_sold = total_sold + thing
 
-# Natural born print statements
-print(item_total)
-print(total)
-print(total_sold)
 
 # This finds the largest amount sold in one sitting. This becomes our x or y highest coordinate.
 for i in total:
@@ -48,15 +44,40 @@ for value in list(range(1, int(b))):
     frequencies.append(value)
     frequencies.append(frequency)
 
-print(frequencies)
+frequencies.append(18)
+frequencies.append(1)
+
 
 # Visualization
-x_values = total
-data = [Bar(x=frequencies.sort(), y=x_values)]
+x_values = frequencies[::2]
+y_values = frequencies[1::2]
 
-x_axis_config = {'title': 'Result', 'dtick': 1}
-y_axis_config = {'title': 'Frequency of Result'}
-my_layout = Layout(title='Results of how many Clementines were sold in one sitting.',
-                   xaxis=x_axis_config,
-                   yaxis=y_axis_config)
-offline.plot({'data': data, 'layout': my_layout}, filename='Fruit_Sale_Vis')
+
+data = [{
+    'type': 'bar',
+    'x': x_values,
+    'y': y_values,
+    'marker': {
+        'color': 'rgb(60, 100, 150)',
+        'line': {'width': 1.5, 'color': 'rgb(25, 25, 25)'}
+    },
+    'opacity': 1
+}]
+
+my_layout = {
+    'title': f'List Name Stuff',
+    'title_x': 0.5,
+    'xaxis': {
+        'title': 'Repository',
+        'titlefont': {'size': 24},
+        'tickfont': {'size': 14},
+    },
+    'yaxis': {
+        'title': 'Stars',
+        'titlefont': {'size': 24},
+        'tickfont': {'size': 14},
+    },
+}
+
+fig = {'data': data, 'layout': my_layout}
+offline.plot(fig, filename='python_repos.html')
